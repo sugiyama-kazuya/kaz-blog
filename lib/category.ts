@@ -19,7 +19,6 @@ export async function getAllCategories(): Promise<categories> {
   })
 
   const categories = await response.json()
-
   return categories.contents.map((content: any) => {
     return content.category
   })
