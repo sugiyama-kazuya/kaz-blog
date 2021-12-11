@@ -1,0 +1,40 @@
+.main {
+  flex: 1;
+}
+
+.postList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+}
+
+.postRecord {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
+  width: calc(100% / 2 - 40px);
+  max-width: 400px;
+}
+
+.postPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.pannelBottom {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0 8px;
+}
+
+.recordTitle {
+  margin-bottom: 20px;
+}
+
+.authorInfo {
+  text-align: center;
+}
+
+.createdAt {
+  font-size: 8px;
+}

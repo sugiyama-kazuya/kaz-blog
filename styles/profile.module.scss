@@ -1,0 +1,85 @@
+.wrapper {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.dateListWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  .dateList {
+    display: flex;
+  }
+
+  .dateIconWrapper {
+    display: flex;
+    color: rgb(175, 175, 175);
+    margin-bottom: 20px;
+
+    span {
+      margin-left: 5px;
+    }
+  }
+}
+
+.eyecatch {
+  width: 90%;
+  position: relative;
+  height: 400px;
+}
+
+.content {
+  padding: 40px 20px;
+  width: 100%;
+  line-height: 2;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+}
+
+.row {
+  display: flex;
+
+  h2 {
+    min-width: 100px;
+    margin-right: 20px;
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 15px;
+  }
+}
+
+.row:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.careerWrapUp {
+  display: flex;
+  flex-direction: column;
+}
+
+.career {
+  display: flex;
+  flex-direction: column;
+}
+
+.careerPeriod {
+  min-width: 100px;
+  margin-right: 20px;
+}
+
+.step {
+  display: flex;
+}

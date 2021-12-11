@@ -1,0 +1,102 @@
+.frame {
+  background-color: #fff;
+  width: 100%;
+  margin-right: 50px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category {
+  width: 100%;
+  padding: 20px;
+
+  & span {
+    background-color: #a1d81f;
+    padding: 5px 5px 5px 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+}
+
+.dateListWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+
+  & .dateList {
+    display: flex;
+
+    & li {
+      color: rgb(170, 168, 168);
+      display: flex;
+    }
+
+    & li:first-child {
+      margin-right: 20px;
+    }
+  }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  max-width: 80%;
+  margin-bottom: 30px;
+}
+
+.eyecatch {
+  width: 90%;
+  position: relative;
+  height: 200px;
+  box-shadow: 0 5px 10px 0 rgba(121, 121, 121, 0.4);
+}
+
+.dateIconWrapper {
+  margin-right: 5px;
+}
+
+.contents {
+  padding: 50px 50px;
+
+  & h2 {
+    padding: 1rem 2rem;
+    border-left: 5px solid #000;
+    background: #f4f4f4;
+    font-size: 20px;
+  }
+
+  & h3 {
+    padding: 0.8rem 1rem;
+    border-left: 5px solid rgb(113, 250, 68);
+    background: #f4f4f4;
+    font-size: 18px;
+  }
+
+  & h4 {
+    padding: 0.6rem 1.2rem;
+    border-left: 5px solid rgb(82, 204, 248);
+    background: #f4f4f4;
+    font-size: 16px;
+  }
+
+  & p {
+    padding: 20px;
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 2px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  & img {
+    width: 100%;
+  }
+}

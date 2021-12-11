@@ -1,0 +1,70 @@
+.sidebar {
+  min-width: 20%;
+  max-width: 25%;
+  height: 100%;
+  margin-right: 30px;
+}
+
+.searchWrapper {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.searchInput {
+  max-width: 450px;
+  width: 100%;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+}
+
+.card:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.category {
+  text-align: center;
+  padding: 0 0 10px;
+  border-bottom: 4px dotted #2e8bee;
+}
+
+.cardList {
+  padding-top: 20px;
+  & .cardRecord {
+    color: rgb(135, 133, 133);
+    font-size: 14px;
+    background-color: rgb(235, 232, 232);
+    padding: 10px 12px;
+    border-radius: 5px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  font-size: 13px;
+  align-items: center;
+}
+
+.profileImg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.profileImgWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profileBtn {
+  margin-top: 20px;
+}
