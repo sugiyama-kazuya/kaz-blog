@@ -1,65 +1,13 @@
 import fetch from 'node-fetch'
 import { BASE_URL, API_KEY } from '../const'
+import { Post, Posts, Ids } from '../types/post'
+import { ParamsCategories } from '../types/category'
 
 /**
- *
+ *全記事を取得する
+ * @returns Posts 記事リスト
  */
-type category = {
-  category: string
-}
-
-/**
- *
- */
-type eyecatch = {
-  url: string
-  height: number
-  width: number
-}
-
-/**
- *
- */
-type data = {
-  id: string
-  title: string
-  createdAt: string
-  category: category
-  eyecatch: eyecatch | null
-}
-
-/**
- *
- */
-type ids = {
-  params: {
-    id: string
-  }
-}[]
-
-/**
- *
- */
-type post = {
-  id: string
-  title: string
-  body: [
-    {
-      fieldId: string
-      content: string
-    },
-  ]
-  category: string
-  eyecatch: string
-  createdAt: string
-  updatedAt: string
-}
-
-/**
- *
- * @returns
- */
-export async function getAllPosts(): Promise<data> {
+export async function getAllPosts(): Promise<Posts> {
   const response = await fetch(`${BASE_URL}/news`, {
     headers: {
       'X-MICROCMS-API-KEY': API_KEY,
@@ -83,7 +31,11 @@ export async function getAllPosts(): Promise<data> {
   })
 }
 
-export async function getAllPostIds(): Promise<ids> {
+/**
+ * 全記事のIDリストを取得する
+ * @returns Ids 記事IDリスト
+ */
+export async function getAllPostIds(): Promise<Ids> {
   const url = `${BASE_URL}/news`
   const res = await fetch(url, {
     headers: {
@@ -109,11 +61,11 @@ export async function getAllPostIds(): Promise<ids> {
 }
 
 /**
- *
- * @param id
- * @returns
+ * 記事を取得する
+ * @param id 取得する記事ID
+ * @returns Post 記事情報
  */
-export async function getPostData(id: string): Promise<post> {
+export async function getPostData(id: string): Promise<Post> {
   const url = `${BASE_URL}/news/${id}`
   const res = await fetch(url, {
     headers: {
@@ -145,4 +97,33 @@ export async function getPostData(id: string): Promise<post> {
     createdAt: convertDateString(result.createdAt),
     updatedAt: convertDateString(result.updatedAt),
   }
+}
+
+/**
+ * 指定のカテゴリの記事一覧を取得する
+ * @param category
+ * @returns Posts 記事リスト
+ */
+export async function getTargetPosts(categoryId: string): Promise<Posts> {
+  const response = await fetch(`${BASE_URL}/news`, {
+    headers: {
+      'X-MICROCMS-API-KEY': API_KEY,
+    },
+  })
+
+  const datas = await response.json()
+
+  const targetData = datas.contents.filter((data: any) => {
+    return data.category.id === categoryId
+  })
+
+  return targetData.map((content: any) => {
+    return {
+      id: content.id,
+      title: content.title,
+      createdAt: content.createdAt,
+      category: content.category,
+      eyecatch: content.eyecatch ? content.eyecatch : null,
+    }
+  })
 }

@@ -1,65 +1,64 @@
-import { GetStaticProps } from 'next'
-import { VFC, useState } from 'react'
+import { VFC } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'node:querystring'
+import { getAllPostCategories } from '../../../lib/category';
+import {getTargetPosts} from '../../../lib/post'
+import Sidebar from "../../components/molecules/sidebar";
 import home from 'styles/Home.module.scss'
-import { getAllPosts } from '../../lib/post'
-import { getAllCategories } from '../../lib/category';
 import Link from 'next/link'
-import Sidebar from "../components/molecules/sidebar";
-import {Categories} from "../../types/category"
+import Image from 'next/image'
+import { Category, Eyecatch } from '../../../types/post'
+import { Categories } from '../../../types/category'
+import { getAllCategories } from '../../../lib/category';
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const allPostData = await getAllPosts()
-  const allCategory: Categories = await getAllCategories();
+interface Params extends ParsedUrlQuery {
+  id: string,
+}
+
+type Props = {
+  posts: {
+  id: string
+  title: string
+  createdAt: string
+  category: Category
+  eyecatch: Eyecatch | null
+  }[],
+  categories: Categories
+}
+
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const paths = await getAllPostCategories()
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params
+}) => {
+  console.log("CategoryName: getStaticProps Start");
+
+  const posts = await getTargetPosts(params.id)
+  const categories = await getAllCategories();
+
   return {
     props: {
-      allPostData,
-      allCategory
+      posts,
+      categories
     },
   }
 }
 
-type category = {
-  category: string
-}
-
-type eyecatch = {
-  url: string
-  height: number
-  width: number
-}
-
-interface Props {
-  allPostData: {
-    id: string
-    title: string
-    createdAt: string
-    category: category | null
-    eyecatch?: eyecatch | null
-  }[],
-  allCategory: Categories
-}
-
-const Home: VFC<Props> = ({ allPostData, allCategory }: Props) => {
-  const [allPosts] = useState(allPostData);
-  const [viewPosts, setViewPosts] = useState(allPostData);
-
-  const searchPosts = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("searchPosts: 検索開始")
-    console.log(event.target.value);
-    const target = event.target.value;
-    if (target === "") {
-      setViewPosts(allPosts);
-
-    } else {
-      const targetPosts = allPosts.filter(post => {
-        return (post.title.indexOf(target) > -1);
-      });
-
-      setViewPosts(targetPosts);
-    }
-  }
+/**
+ * 対象のカテゴリの記事リスト
+ * @param posts 表示する記事リスト
+ * @returns VFC
+ */
+const CategoryId: VFC<Props> = ({ posts, categories }) => {
+  console.log("CategoryId: Start");
   return (
     <>
       <Head>
@@ -71,8 +70,8 @@ const Home: VFC<Props> = ({ allPostData, allCategory }: Props) => {
       </Head>
       <div className={home.main}>
         <ul className={home.postList}>
-          {viewPosts && (
-            viewPosts.map((post) => (
+          {posts && (
+            posts.map((post) => (
             <li className={home.postRecord} key={post.id}>
               <Link href={`/posts/${post.id}`}>
                 <a className={home.postPanel}>
@@ -105,9 +104,9 @@ const Home: VFC<Props> = ({ allPostData, allCategory }: Props) => {
           ))}
         </ul>
       </div>
-      <Sidebar categories={allCategory} inputSeach={searchPosts}/>
+      <Sidebar categories={categories} />
     </>
   )
 }
 
-export default Home
+export default CategoryId;
