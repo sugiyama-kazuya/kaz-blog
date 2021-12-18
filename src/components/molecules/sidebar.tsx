@@ -6,9 +6,11 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Link from 'next/link'
 import Image from 'next/image'
+import { Categories } from "../../../types/category"
 
 interface Props {
-  allCategory: string[]
+  categories: Categories,
+  inputSeach: (param: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 /**
@@ -16,7 +18,10 @@ interface Props {
  * @param Props
  * @returns VFC<Props>
  */
-const Sidebar: VFC<Props> = ({ allCategory }) => {
+const Sidebar: VFC<Props> = ({categories, inputSeach}) => {
+  console.log("Sidebar: Start");
+
+  console.log(categories)
 
   return (
     <>
@@ -26,7 +31,9 @@ const Sidebar: VFC<Props> = ({ allCategory }) => {
             <CardContent className={sidebar.cardInner}>
               <h3 className={sidebar.category}>Search</h3>
               <div className={sidebar.searchWrapper}>
-                <TextField id="outlined-basic" label="記事検索" variant="outlined" className={sidebar.searchInput} />
+                <TextField id="outlined-basic" label="記事検索" variant="outlined" className={sidebar.searchInput}
+                onChange={inputSeach}
+                />
               </div>
             </CardContent>
           </Card>
@@ -59,24 +66,18 @@ const Sidebar: VFC<Props> = ({ allCategory }) => {
               <h3 className={sidebar.category}>カテゴリー</h3>
               <ul className={sidebar.cardList}>
                 {
-                  allCategory.map((category, key) => (
-                    <li className={sidebar.cardRecord} key={key}>{category}</li>
+                  categories.map((category: any) => (
+                    <Link key={category.id} href={`/category/${category.id}`}>
+                      <a className={sidebar.cardRecord}>
+                        <li>{category.name}</li>
+                      </a>
+                    </Link>
                   )
                 )}
               </ul>
             </CardContent>
           </Card>
-          <Card className={sidebar.card}>
-            <CardContent className={sidebar.cardInner}>
-              <h3 className={sidebar.category}>タグ</h3>
-              <ul className={sidebar.cardList}>
-                <li className={sidebar.cardRecord}>PHP</li>
-                <li className={sidebar.cardRecord}>React</li>
-                <li className={sidebar.cardRecord}>AWS</li>
-              </ul>
-            </CardContent>
-          </Card>
-          <Card className={sidebar.card}>
+          {/* <Card className={sidebar.card}>
             <CardContent className={sidebar.cardInner}>
               <h3 className={sidebar.category}>Archive</h3>
               <ul className={sidebar.cardList}>
@@ -85,7 +86,7 @@ const Sidebar: VFC<Props> = ({ allCategory }) => {
                 <li className={sidebar.cardRecord}>2021/12</li>
               </ul>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
     </div>
     </>

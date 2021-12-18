@@ -1,0 +1,7 @@
+コーディング規則
+
+typescript
+https://typescript-jp.gitbook.io/deep-dive/styleguide
+
+React
+https://zenn.dev/kodai/articles/5fe454d436bf3e

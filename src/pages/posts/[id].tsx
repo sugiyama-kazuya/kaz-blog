@@ -8,7 +8,24 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LoopIcon from '@mui/icons-material/Loop';
 
 interface Params extends ParsedUrlQuery {
-  id: string
+  id: string,
+}
+
+type Props = {
+  postData: {
+    id: string
+    title: string
+    body: [
+      {
+        fieldId: string
+        content: string
+      },
+    ]
+    category: string
+    eyecatch: string
+    createdAt: string
+    updatedAt: string
+  }
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
@@ -30,22 +47,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   }
 }
 
-type Props = {
-  postData: {
-    id: string
-    title: string
-    body: [
-      {
-        fieldId: string
-        content: string
-      },
-    ]
-    category: string
-    eyecatch: string
-    createdAt: string
-    updatedAt: string
-  }
-}
 
 const Post: VFC<Props> = (props) => {
   const {
