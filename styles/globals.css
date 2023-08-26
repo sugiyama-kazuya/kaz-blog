@@ -15,3 +15,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+code {
+  padding: 0.2em 0.3em; /* 内側の余白 */
+  margin: 0 0.2em; /* 外側の余白 */
+  border-radius: 5px; /* 角の丸み */
+  color: #404040; /* 文字色 */
+  font-size: 0.9em; /* 文字サイズ */
+}
+
+pre {
+  padding: 1em; /* 内側の余白 */
+  margin: 0 0 1.5em; /* 外側の余白 */
+  border: solid 1px #eaedf2; /* 枠線 */
+  background: #f3f6fc; /* 背景色 */
+  color: #54687c; /* 文字色 */
+}

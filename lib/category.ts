@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { BASE_URL, API_KEY } from '../const'
 import { ParamsCategories } from '../types/category'
 import { Categories } from '../types/category'

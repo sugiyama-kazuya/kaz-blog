@@ -1,7 +1,5 @@
-import fetch from 'node-fetch'
 import { BASE_URL, API_KEY } from '../const'
 import { Post, Posts, Ids } from '../types/post'
-import { ParamsCategories } from '../types/category'
 
 /**
  *全記事を取得する
@@ -15,6 +13,7 @@ export async function getAllPosts(): Promise<Posts> {
   })
 
   const data = await response.json()
+  console.log(data)
 
   if (!data.contents) {
     return data
@@ -24,7 +23,8 @@ export async function getAllPosts(): Promise<Posts> {
     return {
       id: content.id,
       title: content.title,
-      createdAt: content.createdAt,
+      createdAt: convertDateString(content.created_at),
+      updatedAt: convertDateString(content.updated_at),
       category: content.category,
       eyecatch: content.eyecatch ? content.eyecatch : null,
     }
@@ -46,7 +46,6 @@ export async function getAllPostIds(): Promise<Ids> {
   let result
   try {
     result = await res.json()
-    // console.log(result)
   } catch (e) {
     console.error(e)
   }
@@ -79,13 +78,6 @@ export async function getPostData(id: string): Promise<Post> {
     console.log(result)
   } catch (e) {
     console.error(e)
-  }
-
-  const convertDateString = (date: number): string => {
-    const time = new Date(date)
-    return `${time.getUTCFullYear()}.${
-      time.getMonth() + 1
-    }.${time.getDate()} ${time.getHours()}:${time.getMinutes()}`
   }
 
   return {
@@ -126,4 +118,9 @@ export async function getTargetPosts(categoryId: string): Promise<Posts> {
       eyecatch: content.eyecatch ? content.eyecatch : null,
     }
   })
+}
+
+const convertDateString = (date: number): string => {
+  const time = new Date(date)
+  return `${time.getUTCFullYear()}.${time.getMonth() + 1}.${time.getDate()}`
 }

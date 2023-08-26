@@ -21,6 +21,7 @@ export type Posts = {
   id: string
   title: string
   createdAt: string
+  updatedAt: string
   category: Category
   eyecatch: Eyecatch | null
 }[]

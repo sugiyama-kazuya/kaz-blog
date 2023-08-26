@@ -35,6 +35,7 @@ interface Props {
     id: string
     title: string
     createdAt: string
+    updatedAt: string
     category: category | null
     eyecatch?: eyecatch | null
   }[],
@@ -95,7 +96,9 @@ const Home: VFC<Props> = ({ allPostData, allCategory }: Props) => {
                   <div className={home.pannelBottom}>
                     <h2 className={home.recordTitle}>{post.title}</h2>
                     <div className={home.authorInfo}>
-                      <span className={home.createdAt}>2020.5.18</span>
+                        <span className={home.createdAt}>
+                          {post.updatedAt}
+                        </span>
                     </div>
                   </div>
                 </a>
