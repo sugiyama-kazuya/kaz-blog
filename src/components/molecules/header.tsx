@@ -18,12 +18,14 @@ const Header: VFC = () => {
           </div>
           <div className={header.categoryListWrapper}>
             <ul className={header.categoryList}>
-              <li className="category">
-                <a href="">プロフィール</a>
-              </li>
-              <li className="category">
+              <Link href="/profile">
+                <li className="category">
+                  <a href="">プロフィール</a>
+                </li>
+              </Link>
+              {/* <li className="category">
                 <a href="">ポートフォリオ </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

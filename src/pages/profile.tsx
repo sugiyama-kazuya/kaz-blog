@@ -1,4 +1,5 @@
 import { VFC } from 'react'
+import { GetStaticProps } from 'next'
 import React, { useState, useRef, useEffect } from 'react';
 import profile from "styles/profile.module.scss";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -11,11 +12,36 @@ import Typography from '@mui/material/Typography';
 import Stepper from '@mui/material/Stepper';
 import StepContent from '@mui/material/StepContent';
 
+type Props = {
+  updatedAt: string
+  createdAt: string
+}
+
+
+
 const Profile: VFC = () => {
-  const careerSteps = ['プログラマー', 'webコーダー', '株式会社illumatics', '個人事業主'];
+
+  const carrersStep = [
+    {
+      job: "株式会社PPFパートナーズ",
+      detail: "",
+    },
+    {
+      job: "web制作（フリーランス）",
+      detail: "webデザイナー様とのご縁がありまして、案件を頂いておりました。LPコーディングやWordPressを用いたweb制作に携わっておりました。"
+    },
+    {
+      job: "株式会社illumatics",
+      detail: "客先で、テスターとして従事。"
+    },
+    {
+      job: "小売業（フリーランス）",
+      detail: "Amazonやメルカリでブランド品や家電などの転売を行っていました。"
+    },
+  ]
 
   const careers = useRef([]);
-  careerSteps.forEach((_, i) => {
+  carrersStep.forEach((_, i) => {
         careers.current[i] = React.createRef();
   });
 
@@ -118,7 +144,7 @@ const Profile: VFC = () => {
           <div className={profile.row}>
             <h2>経歴要約：</h2>
             <div className={profile.careerWrapUp}>
-              <p>2021/4~ プログラマーとして正社員として活動。</p><br />
+              <p>2021/4~ 株式会社PPFパートナーズでPG業</p><br />
               <p>2020/10~ フリーでwebコーダーとして活動</p><br />
               <p>2021/4~ SES会社で従事</p><br />
               <p>2021/4~ フリーでブランド品の転売などの小売り業</p><br/>
@@ -131,20 +157,14 @@ const Profile: VFC = () => {
             <div className={profile.career}>
                 <div className={profile.stepBar}>
                   <Stepper orientation="vertical" activeStep={activeStep}>
-                    {careerSteps.map((label, index) => {
+                    {carrersStep.map((content, index) => {
                       return (
                         <Step ref={careers.current[index]} key={index} expanded={true}>
-                          <StepLabel >{label}</StepLabel>
+                          <StepLabel >{content.job}</StepLabel>
                           <StepContent>
                             <Typography>
-                              Try out different ad text to see what brings in the most customers,
-                              and learn how to enhance your ads using features like ad extensions.
-                              If you run into any problems with your ads, find out how to tell if
-                              theyre running and how to resolve approval issues.
+                              {content.detail}
                             </Typography>
-                            <p>
-                              <span>役割：</span>PG
-                            </p>
                           </StepContent>
                         </Step>
                       );

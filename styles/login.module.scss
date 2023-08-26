@@ -1,0 +1,46 @@
+.login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginWrapper {
+    width: 80%;
+    max-width: 600px;
+    padding: 50px 0;
+    max-height: 350px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginText {
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.loginButton {
+
+}
+
+.loginButtonWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.errorMsg {
+    color: red;
+    margin: 10px 0 20px 0;
+}
+
+.errorMsgWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+

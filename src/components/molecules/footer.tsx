@@ -1,6 +1,6 @@
-import {} from 'react'
 import { VFC } from 'react'
 import frame from 'styles/frame.module.scss'
+import Link from 'next/link'
 
 const Footer: VFC = () => {
   return (
@@ -11,7 +11,12 @@ const Footer: VFC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by <span></span>
+          Powered by
+          <span>
+            <Link href={`/login`}>
+              <a>kaz-blog</a>
+            </Link>
+          </span>
         </a>
       </footer>
     </>

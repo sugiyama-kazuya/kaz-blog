@@ -4,7 +4,6 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { ParsedUrlQuery } from 'node:querystring'
 import { getAllPostCategories } from '../../../lib/category';
 import {getTargetPosts} from '../../../lib/post'
-import Sidebar from "../../components/molecules/sidebar";
 import home from 'styles/Home.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -57,8 +56,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
  * @param posts 表示する記事リスト
  * @returns VFC
  */
-const CategoryId: VFC<Props> = ({ posts, categories }) => {
+const CategoryId: VFC<Props> = ({ posts }) => {
   console.log("CategoryId: Start");
+
   return (
     <>
       <Head>
@@ -104,7 +104,7 @@ const CategoryId: VFC<Props> = ({ posts, categories }) => {
           ))}
         </ul>
       </div>
-      <Sidebar categories={categories} />
+      {/* <Sidebar categories={categories} inputSeach={searchPosts}/> */}
     </>
   )
 }
